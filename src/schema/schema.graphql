@@ -1,0 +1,72 @@
+enum Region {
+  ASIA
+  EUROPE
+  AFRICA
+  OCEANIA
+  AMERICAS
+}
+
+enum SubRegion {
+  SOUTHERN_ASIA
+  NORTHERN_EUROPE
+  SOUTHERN_EUROPE
+  NORTHERN_AFRICA
+  POLYNESIA
+  SUB_SAHARAN_AFRICA
+  LATIN_AMERICA_AND_THE_CARIBBEAN
+  WESTERN_ASIA
+  AUSTRALIA_AND_NEW_ZEALAND
+  WESTERN_EUROPE
+  EASTERN_EUROPE
+  NORTHERN_AMERICA
+  SOUTH_EASTERN_ASIA
+  EASTERN_ASIA
+  MELANESIA
+  MICRONESIA
+  CENTRAL_ASIA
+}
+
+input CountryFilter {
+  iso2: String
+  iso3: String
+  region: Region
+  subRegion: SubRegion
+}
+
+input CountriesInput {
+  filter: CountryFilter
+}
+
+type CountriesPayload {
+  totalCount: Int!
+  countries: [Country!]!
+}
+
+type EmbassyContacts {
+  type: String
+}
+
+type CountryTemporaryEntry {
+  type: String
+}
+
+type CountryTransitEntry {
+  type: String
+}
+
+type CountryAdditionalInfo {
+  type: String
+}
+
+type Country {
+  name: String!
+  iso2: String!
+  iso3: String!
+  countryCode: String!
+  region: Region
+  subRegion: SubRegion
+}
+
+type Query {
+  countries(input: CountriesInput): CountriesPayload!
+}
